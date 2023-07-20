@@ -1,0 +1,22 @@
+{
+  "name": "selph-bg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pkpedram/selph-bg.git"
+  },
+  "author": "Pedram Keshavarzi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pkpedram/selph-bg/issues"
+  },
+  "homepage": "https://github.com/pkpedram/selph-bg#readme",
+  "dependencies": {
+    "fs-extra": "^11.1.1"
+  }
+}
