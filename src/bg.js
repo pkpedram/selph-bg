@@ -14,7 +14,19 @@ class SelphBG {
             API_URL=http://localhost:${config.apiPort}
         `
         fs.writeFileSync(`${url}/.env`, initialEnv);
-        
+       return 'BackEnd Env Generated...' 
+    }
+    genAppJs = async (config = Object, url = String) => {
+     
+            var data = fs.readFileSync('backend/src/app.js', 'utf-8');
+            let httTempl = fs.readFileSync('/templates/httpApp.txt', 'utf-8')
+          
+            var newValue = data.replace(/^\./gim, httTempl);
+          
+            fs.writeFileSync('backend/src/app.js', newValue, 'utf-8');
+          
+            console.log('http App done complete');
+          
     }
 }
 
