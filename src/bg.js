@@ -1,35 +1,50 @@
-
-const fs = require('fs-extra')
+const fs = require("fs-extra");
+const { httpsTemplate, httpTemplate } = require("./templates");
 
 class SelphBG {
-    genEnv = async (config = Object, url = String) =>  {
-        let initialEnv = `
-            PORT=${config.apiPort}
-            DB_USER= ${config?.db?.user ? config.db.user : config.name}
-            DB_PASSWORD=${config?.db?.password ? config.db.password : 1234}
-            DB_NAME=${config?.db?.name ? config.db.name : config.name + '_db'}
-            DB_PORT=${config?.db?.port ? config.db.port : '27017'}
-            JWT_TOKEN_SECRET=
-            HASHING_SECRET=245033554257412
-            API_URL=http://localhost:${config.apiPort}
-        `
+  genEnv = async (config = Object, url = String) => {
+    let initialEnv =
+`PORT=${config.apiPort}
+DB_USER= ${config?.db?.user ? config.db.user : config.name}
+DB_PASSWORD=${config?.db?.password ? config.db.password : 1234}
+DB_NAME=${config?.db?.name ? config.db.name : config.name + "_db"}
+DB_PORT=${config?.db?.port ? config.db.port : "27017"}
+JWT_TOKEN_SECRET=
+HASHING_SECRET=245033554257412
+API_URL=http://localhost:${config.apiPort}`;
+
+    let currentEnv = fs.readFileSync(`${url}/.env`, 'utf-8')
+
+    if(currentEnv !== initialEnv){
         fs.writeFileSync(`${url}/.env`, initialEnv);
-       return 'BackEnd Env Generated...' 
+        return "🟥 Selph - BackEnd Env Generated...";
+    }else{
+        return null
     }
-    genAppJs = async (config = Object, url = String) => {
-     
-            var data = fs.readFileSync('backend/src/app.js', 'utf-8');
-            let httTempl = fs.readFileSync('/templates/httpApp.txt', 'utf-8')
-          
-            var newValue = data.replace(/^\./gim, httTempl);
-          
-            fs.writeFileSync('backend/src/app.js', newValue, 'utf-8');
-          
-            console.log('http App done complete');
-          
+
+  };
+  genAppJs = async (config = Object, url = String) => {
+    let currentFile = fs.readFileSync("backend/src/app.js", "utf-8");
+
+    if (config.https == true) {
+      if (currentFile !== httpsTemplate) {
+        fs.writeFileSync("backend/src/app.js", httpsTemplate);
+        return "🟥 Selph - HTTPS app.js generated...";
+      } else {
+        return null;
+      }
+    } else {
+      if (currentFile !== httpTemplate) {
+        fs.writeFileSync("backend/src/app.js", httpTemplate);
+        return "🟥 Selph - HTTP app.js generated...";
+      } else {
+        return null;
+      }
     }
+
+  };
 }
 
-const selphBG = new SelphBG()
+const selphBG = new SelphBG();
 
-module.exports = selphBG
+module.exports = selphBG;
