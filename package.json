@@ -1,6 +1,6 @@
 {
   "name": "selph-bg",
-  "version": "1.1.23",
+  "version": "1.2.21",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/pkpedram/selph-bg#readme",
   "dependencies": {
-    "fs-extra": "^11.1.1"
+    "fs-extra": "^11.1.1",
+    "selph-mg": "^1.1.1"
   }
 }
