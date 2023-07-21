@@ -1,6 +1,7 @@
 const fs = require("fs-extra");
 const { httpsTemplate, httpTemplate } = require("./templates");
 const mg = require('selph-mg')
+const cg = require('selph-cg')
 
 class SelphBG {
   genEnv = async (config = Object, url = String) => {
@@ -52,6 +53,13 @@ API_URL=http://localhost:${config.apiPort}`;
             throw error
         }
   }
+  genCg = async(config = Object) => {
+    try {
+        await cg(config)
+    } catch (error) {
+        throw error
+    }
+  } 
 }
 
 const selphBG = new SelphBG();
