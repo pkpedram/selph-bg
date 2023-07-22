@@ -1,7 +1,9 @@
 const fs = require("fs-extra");
 const { httpsTemplate, httpTemplate } = require("./templates");
 const mg = require('selph-mg')
-const cg = require('selph-cg')
+const cg = require('selph-cg');
+const rg = require("selph-rg");
+const sg = require("selph-sg");
 
 class SelphBG {
   genEnv = async (config = Object, url = String) => {
@@ -15,14 +17,11 @@ JWT_TOKEN_SECRET=
 HASHING_SECRET=245033554257412
 API_URL=http://localhost:${config.apiPort}`;
 
-    let currentEnv = fs.readFileSync(`${url}/.env`, 'utf-8')
 
-    if(currentEnv !== initialEnv){
+   
         fs.writeFileSync(`${url}/.env`, initialEnv);
         return "🟥 Selph - BackEnd Env Generated...";
-    }else{
-        return null
-    }
+   
 
   };
   genAppJs = async (config = Object, url = String) => {
@@ -59,7 +58,21 @@ API_URL=http://localhost:${config.apiPort}`;
     } catch (error) {
         throw error
     }
-  } 
+  }
+  genRg = async (config = Object) => {
+    try {
+        await rg(config)
+    } catch (error) {
+        throw error
+    }
+  }
+  genSg = async (config = Object) => {
+    try {
+      await sg(config)
+    } catch (error) {
+      throw error
+    }
+  }
 }
 
 const selphBG = new SelphBG();
