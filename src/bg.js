@@ -13,7 +13,7 @@ DB_USER= ${config?.db?.user ? config.db.user : config.name}
 DB_PASSWORD=${config?.db?.password ? config.db.password : 1234}
 DB_NAME=${config?.db?.name ? config.db.name : config.name + "_db"}
 DB_PORT=${config?.db?.port ? config.db.port : "27017"}
-JWT_TOKEN_SECRET=
+JWT_TOKEN_SECRET=SelphIsCool12345678SelphSelph!!!===
 HASHING_SECRET=245033554257412
 API_URL=http://localhost:${config.apiPort}`;
 
